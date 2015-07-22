@@ -4,6 +4,8 @@ See results and problem statement:
 https://codility.com/demo/results/demoW36GV7-Z8P/ 81%
 
 https://codility.com/demo/results/demoFG2EVC-GU3/ 90%
+
+https://codility.com/demo/results/demo27Y7W6-37Y/ 100%
 */
 public class FrogRiverOne {
 
@@ -14,31 +16,22 @@ public class FrogRiverOne {
   // (1,[1]) = 0
   public int solution(int X, int[] A) {
    // write your code in Java SE 8
+   int[] occupied = new int[A.length+1];
+   int i = 0;
+   int total = X;
 
-     int[] occupied = new int[A.length+1];
-
-     int i = 0;
-     int total = ( X * (X+1))/2;
-
-     for (;i < A.length; ++i) {
-         int index = A[i];
-
-         if( index < occupied.length) {
-             if (occupied[index] == 0) {
-                 total -= index;
-                 occupied[index] = ++occupied[index];
-             }  else if( total > 0 ) {
-               occupied[index] = ++occupied[index];
-             }
-         }
-
-         if (total <=0) {
-             break;
-         }
-     }
-     //System.out.println("i:" + i );
-     //System.out.println(java.util.Arrays.toString(occupied));
-
-     return total<=0 ? i : -1;
+   for (;i < A.length; ++i) {
+       int index = A[i];
+       if( index < occupied.length) {
+           if (occupied[index] == 0) {
+              --total;
+              occupied[index] = 1;
+           }
+       }
+       if (total ==0) {
+           break;
+       }
+   }
+   return total==0 ? i : -1;
  }
 }
