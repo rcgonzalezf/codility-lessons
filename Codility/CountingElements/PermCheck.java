@@ -5,7 +5,6 @@ public class PermCheck {
 
   public static final int NOT_PERMUTATION = 0;
   public static final int PERMUTATION = 1;
-
   // (4,1,3,2) = 1
   // (4,1,3) = 0
   // (1) = 1
