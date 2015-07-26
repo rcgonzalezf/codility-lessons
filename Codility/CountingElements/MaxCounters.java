@@ -21,7 +21,6 @@ public class MaxCounters {
               int position = A[i]-1;
               result[position] = result[position] > lastUpdate
                                         ? result[position] + 1 : lastUpdate + 1;
-
               // updating the max for future use
               if(maxOfCounter <=  result[position]) {
                   maxOfCounter = result[position];
@@ -34,7 +33,6 @@ public class MaxCounters {
              result[i] = lastUpdate;
          }
      }
-
      return result;
-}
+   }
 }
