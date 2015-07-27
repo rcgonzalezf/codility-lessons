@@ -10,7 +10,6 @@ public class PassingCars {
   // [0,1,1,1,1,1,1,0] = 6
   // [1,1,1,1,0,1,0] = 1
   // [1,1,1,1,0,1,1,0,1] = 4
-  class Solution {
     public static final int FAIL = -1;
 
     public int solution(int[] A) {
@@ -50,6 +49,5 @@ public class PassingCars {
 
         return (int) combinations;
     }
-}
 
 }
