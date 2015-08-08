@@ -6,6 +6,12 @@ public class Triangle {
     public static final int NOT_TRIANGULAR = 0;
     public static final int TRIANGULAR = 1;
 
+    // testcases
+    // (10,2,5,1,8,20) = 1
+    // (10,50,5,1) = 0
+    // (2147483647, 2147483647, 2147483647) = 1 for overflow
+    // (1,2) = 0 two elements
+    // (-1,-1,-1) = 0 negatives
     public int solution(int[] A) {
         Arrays.sort(A);
         int length = A.length;
