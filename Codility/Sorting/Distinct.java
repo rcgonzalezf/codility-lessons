@@ -1,5 +1,6 @@
 import java.util.Set;
 import java.util.HashSet;
+import java.util.BitSet;
 
 // https://codility.com/demo/results/demoVS545C-F36/  100%
 // https://codility.com/demo/results/demoX7MSFZ-JMB/ 100%
@@ -7,10 +8,28 @@ import java.util.HashSet;
 public class Distinct {
 
     // testcases
-    // (1) = 1
-    // (1,2) = 2
-    // (2,1,1,2,3,1) = 3
+    // [0] = 1
+    // [1,2] = 2
+    // [2,1,1,2,3,1] = 3
+    // [-1,0,1,1] = 3
+    // https://codility.com/demo/results/demoN57YUC-G9Z/ 100%
     public int solution(int[] A) {
+        // first part for negatives, second part for positives and adding 1
+        // to count the zero as part of the positives section
+        int offset = 1_000_000;
+        BitSet bitSet = new BitSet( (offset * 2) + 1 );
+
+        for (int element : A ) {
+            int index = element >= 0 ? offset + element : (element * -1);
+            bitSet.set(index);
+        }
+
+        return bitSet.cardinality();
+    }
+
+    // If we have collitions this is the worst it can lead
+    // to a O N^2 performance a O N space
+    public int solutionWithSetPossiblyWorst(int[] A) {
         Set<Integer> sparseArray = new HashSet<>();
         int distinctCount= 0;
 
