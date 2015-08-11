@@ -1,54 +1,39 @@
 
 // https://codility.com/demo/results/demoYRTAB2-3SJ/ 100/20 60%
+// https://codility.com/demo/results/demo4S4VJX-WMJ/ 100/100
 public class MinAvgTwoSlice {
 
-      public int solution(int[] A) {
-         int len = A.length, result = len - 1;
-         double[] minimumAverages = createMinimumAverages(A);
-         double min = Double.MAX_VALUE;
+    public int solution(int[] A) {
+        int len = A.length, result = len - 1, sum = 0;
+        int[] prefixSums = new int[len + 1];
 
-         for (int i = 0; i < len; ++i ) {
-             if( minimumAverages[i] < min ) {
-                 min = minimumAverages[i];
-                 result = i;
-             }
-         }
+        for (int i = 1; i <= len; ++i) {
+            prefixSums[i] = prefixSums[i-1] + A[i-1];
+        }
 
-         return result;
-     }
+        double min = Double.MAX_VALUE, average = 0d;
 
-     public double[] createMinimumAverages(int[] A) {
-         int len = A.length;
+        for (int P = 0, Q = 1; Q + 1 < prefixSums.length; ++P, ++Q ) {
+            sum = prefixSums[Q + 1] - prefixSums[P];
+            average = (sum)/(double) 2;
 
-         int[] prefixSums = new int[len];
+            if (average < min) {
+                min = average;
+                result = P;
+            }
 
-         for (int i = 0; i < len; ++i) {
-             if(i==0) {
-                 prefixSums[i] = A[i];
-             } else {
-                 prefixSums[i] = prefixSums[i-1] + A[i];
-             }
-         }
+            if ( Q + 2 < prefixSums.length ) {
+                sum = prefixSums[Q + 2] - prefixSums[P];
+                average = (sum)/(double) 3;
 
-         double[] minimumAverages = new double[len];
-         for ( int P = 0; P < len; ++P) {
-             double minAverage = Double.MAX_VALUE;
-             for (int Q = P + 1 ; Q < len; ++Q) {
-                 int sum = 0;
-                 if ( P == 0 ) {
-                     sum = prefixSums[Q];
-                 } else {
-                     sum = prefixSums[Q] - prefixSums[P-1];
-                 }
-                 double average = (sum)/(double) ( Q - P + 1 );
+                if (average < min) {
+                    min = average;
+                    result = P;
+                }
+            }
 
-                 if( minAverage > average) {
-                     minAverage = average;
-                 }
-             }
-             minimumAverages[P] = minAverage;
-         }
+        }
 
-         return minimumAverages;
-     }
- }
+        return result;
+    }
+}
