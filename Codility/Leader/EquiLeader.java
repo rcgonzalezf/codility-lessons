@@ -1,7 +1,6 @@
-
 // https://codility.com/demo/results/demoZSME5G-RXN/ 100
 
-class Solution {
+public class EquiLeader {
   public int solution(int[] A) {
      Leader leader = getLeader(A);
      if ( leader == null ) { return 0; }
@@ -29,14 +28,12 @@ class Solution {
  }
 
  public Leader getLeader(int[] A) {
-     int indexOfCandidate = -1;
-     int stackCounter = 0, candidate=-1, value=-1, i =0;
+     int stackCounter = 0, candidate=-1, value=-1;
 
      for(int element: A ) {
          if (stackCounter == 0) {
              value = element;
              ++stackCounter;
-             indexOfCandidate = i;
          } else {
              if (value == element) {
                  ++stackCounter;
@@ -44,7 +41,6 @@ class Solution {
                  --stackCounter;
              }
          }
-         ++i;
      }
 
      if (stackCounter > 0 ) {
